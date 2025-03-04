@@ -15,8 +15,6 @@ jobs:
           node-version: 18
       - name: Install
         run: npm install
-      - name: build
-        run: npm run test
       - name: Test
         run: npm run test > test.txt
       - name: Upload Test
