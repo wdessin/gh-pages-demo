@@ -1,0 +1,43 @@
+name: Deploy React App
+permissions:
+  contents: write
+on: 
+    workflow_dispatch:
+    push:
+      branches:
+        - main
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code
+        uses: actions/checkout@v3
+      - name: Install Node v18
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install
+        run: npm install
+      - name: build
+        run: npm run test
+      - name: Test
+        run: npm run test > test.txt
+      - name: Upload Test
+        uses: actions/upload-artifact@v3
+        with:
+          name: testing
+          path: test.txt
+  download-test:
+    name: Download Test
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: DownloadTest
+        uses: actions/download-artifact@v3
+        with:
+          name: testing
+      - name: Print Result
+        shell: bash
+        run: |
+          value=`cat testing`
+          echo $value

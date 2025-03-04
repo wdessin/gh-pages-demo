@@ -2,10 +2,7 @@ name: Deploy React App
 permissions:
   contents: write
 on: 
-    workflow_dispatch:
-    push:
-      branches:
-        - main
+  workflow_dispatch:
 jobs:
   test:
     runs-on: ubuntu-latest
