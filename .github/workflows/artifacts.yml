@@ -1,11 +1,8 @@
-name: Deploy React App
+name: Artifacts React App
 permissions:
   contents: write
 on: 
     workflow_dispatch:
-    push:
-      branches:
-        - main
 jobs:
   test:
     runs-on: ubuntu-latest
